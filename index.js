@@ -3,7 +3,8 @@ const app = express();
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
-const port = 3000;
+require("dotenv").config();
+const port = process.env.PORT;
 
 app.use(cors());
 app.use(express.json());
@@ -31,8 +32,8 @@ function verifyToken(req, res, next) {
   next();
 }
 
-const uri =
-  "mongodb+srv://zobayedict05:kcolbYJYT3zMsdaA@cluster0.tegygzg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const uri = process.env.DATABASE_URL;
+
 
 const client = new MongoClient(uri, {
   serverApi: {
