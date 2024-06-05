@@ -3,6 +3,7 @@ const app = express();
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const cors = require("cors");
 const jwt = require("jsonwebtoken");
+// const dbConnect = require("./dbConnect")
 require("dotenv").config();
 const port = process.env.PORT;
 
@@ -57,6 +58,8 @@ async function run() {
       const result = await fruitsCollection.insertOne(fruitsData);
       res.send(result);
     });
+
+    
     app.get("/fruits", async (req, res) => {
       const fruitsData = fruitsCollection.find();
       const result = await fruitsData.toArray();
