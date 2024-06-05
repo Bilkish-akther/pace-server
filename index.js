@@ -15,7 +15,7 @@ function createToken(user) {
     {
       email: user.email,
     },
-    "zobayed",
+    "bilkish",
     { expiresIn: "1h" }
   );
   return token;
@@ -24,7 +24,7 @@ function createToken(user) {
 function verifyToken(req, res, next) {
   const token = req.headers.authorization.split(" ")[1];
   console.log(token);
-  const verify = jwt.verify(token, "zobayed");
+  const verify = jwt.verify(token, "bilkish");
   console.log(verify);
   if (!verify?.email) {
     return res.send("You are not authorization");
@@ -52,7 +52,7 @@ async function run() {
     const fruitsCollection = productDB1.collection("fruitsCollection");
     const userCollection = userDb.collection("userCollection");
 
-    // product routes
+   
     app.post("/fruits", verifyToken, async (req, res) => {
       const fruitsData = req.body;
       const result = await fruitsCollection.insertOne(fruitsData);
@@ -90,7 +90,7 @@ async function run() {
       res.send(fruitsData);
     });
 
-    // user
+ 
     app.post("/user", async (req, res) => {
       const user = req.body;
 
@@ -111,7 +111,7 @@ async function run() {
 
     app.get("/user/get/:id", async (req, res) => {
       const id = req.params.id;
-      // console.log(id);
+      
       const result = await userCollection.findOne({ _id: new ObjectId(id) });
       res.send(result);
     });
