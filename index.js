@@ -72,7 +72,7 @@ async function run() {
       });
       res.send(fruitsData);
     });
-    app.patch("/fruits/:id", verifyToken, async (req, res) => {
+    app.patch("/fruits/:id",  async (req, res) => {
       const id = req.params.id;
       const updateData = req.body;
       const fruitsData = await fruitsCollection.updateOne(
